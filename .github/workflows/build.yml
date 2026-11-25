@@ -57,3 +57,8 @@ jobs:
           name: JARVIS-APK
           path: extracted/**/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+          
+      - name: Fix reminder argument order
+        run: |
+          FILE="$PROJECT_DIR/app/src/main/java/com/jarvis/ai/ReminderReceiver.kt"
+          sed -i 's/ReminderStore.schedule(context, item.first, item.second, item.third)/ReminderStore.schedule(context, item.first, item.third, item.second)/' "$FILE"
