@@ -46,11 +46,6 @@ jobs:
           fi
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
 
-      - name: Fix reminder argument order
-        run: |
-          FILE="$PROJECT_DIR/app/src/main/java/com/jarvis/ai/ReminderReceiver.kt"
-          sed -i 's/ReminderStore.schedule(context, item.first, item.second, item.third)/ReminderStore.schedule(context, item.first, item.third, item.second)/' "$FILE"
-
       - name: Build APK
         run: gradle -p "$PROJECT_DIR" --no-daemon assembleDebug
 
